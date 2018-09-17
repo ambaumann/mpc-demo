@@ -143,7 +143,7 @@ public class RockTourSolveAllTurtleTest{
         SolverFactory<RockTourSolution> solverFactory = SolverFactory.createFromXmlResource(solverConfig);
         //buildAndSolve()// fills in minutesSpentLimit
         solverFactory.getSolverConfig().setTerminationConfig(new TerminationConfig());
-        // TODO removing this for now.
+        // TODO removing this for now. Believe this is now available with version 7.11
         //if (MOVE_THREAD_COUNT_OVERRIDE != null) {
         //    solverFactory.getSolverConfig().setMoveThreadCount(MOVE_THREAD_COUNT_OVERRIDE);
         //}

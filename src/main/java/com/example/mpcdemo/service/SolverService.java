@@ -3,10 +3,13 @@ package com.example.mpcdemo.service;
 import java.io.File;
 
 import org.optaplanner.persistence.common.api.domain.solution.SolutionFileIO;
+import org.springframework.stereotype.Service;
 
 import com.example.mpcdemo.domain.RockTourSolution;
 import com.example.mpcdemo.persistence.RockTourXlsxFileIO;
 
+
+@Service
 public class SolverService {
 
 	public static final String SOLVER_CONFIG = "org/optaplanner/examples/rocktour/solver/rockTourSolverConfig.xml";

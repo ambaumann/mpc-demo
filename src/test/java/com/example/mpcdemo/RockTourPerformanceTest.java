@@ -116,7 +116,7 @@ public class RockTourPerformanceTest {
 				assertNotNull(constraintMatchTotals);
 				assertEquals(score, constraintMatchTotals.stream()
 						// TODO change here as well due to version of optaplanner
-						.map(ConstraintMatchTotal::getScoreTotal).reduce(Score::add)
+						.map(ConstraintMatchTotal::getScore).reduce(Score::add)
 						.orElse(scoreDefinition.getZeroScore()));
 				assertNotNull(scoreDirector.getIndictmentMap());
 			}

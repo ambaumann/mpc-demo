@@ -28,8 +28,10 @@
 	<dependencies>
 		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-actuator</artifactId> 
 			</dependency> <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-jpa</artifactId> 
-			</dependency> <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-web</artifactId> 
-			</dependency> -->
+			</dependency>  -->
+			<dependency>
+			 <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-web</artifactId> 
+			</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -46,16 +48,20 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.optaplanner/optaplanner-core -->
 		<dependency>
 			<groupId>org.optaplanner</groupId>
 			<artifactId>optaplanner-core</artifactId>
-			<version>7.7.0.Final-redhat-10</version>
+			<version>7.11.0.Final</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.optaplanner/optaplanner-persistence-common -->
 		<dependency>
 			<groupId>org.optaplanner</groupId>
 			<artifactId>optaplanner-persistence-common</artifactId>
-			<version>7.7.0.Final-redhat-10</version>
+			<version>7.11.0.Final</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
