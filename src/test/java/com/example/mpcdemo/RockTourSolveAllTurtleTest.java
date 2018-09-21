@@ -20,13 +20,12 @@ import static org.junit.Assume.assumeTrue;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runners.Parameterized;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
@@ -103,7 +102,11 @@ public class RockTourSolveAllTurtleTest{
     //private static final String MOVE_THREAD_COUNT_OVERRIDE = System.getProperty(TestSystemProperties.MOVE_THREAD_COUNT);
 
 
-
+    /**
+     * These tests are breaking.
+     * https://issues.jboss.org/browse/PLANNER-1200
+     */
+    @Ignore
     @Test
     public void runFastAndFullAssert() {
         //checkRunTurtleTests();

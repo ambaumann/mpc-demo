@@ -6,6 +6,8 @@ import org.optaplanner.persistence.common.api.domain.solution.SolutionFileIO;
 import org.springframework.stereotype.Service;
 
 import com.example.mpcdemo.domain.RockTourSolution;
+import com.example.mpcdemo.domain.dto.Solution;
+import com.example.mpcdemo.domain.dto.UserInput;
 import com.example.mpcdemo.persistence.RockTourXlsxFileIO;
 
 
@@ -47,5 +49,37 @@ public class SolverService {
 
 	public String getSolverConfig() {
 		return SOLVER_CONFIG;
+	}
+
+	public boolean isFinalSolutionReady() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public Solution getFinalSolution() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void solveSolution() {
+		// TODO Auto-generated method stub
+	}
+
+	public boolean getSolverStatus() {
+		// TODO Auto-generated method stub
+		return isFinalSolutionReady();
+	}
+	
+	public void addUserInput(UserInput userInput) {
+		// TODO Auto-generated method stub
+		/**
+		 * Add $$ to existing revenue opportunity for each user input.
+		 * still up in the air what will be in the user input. May be adding a new location of just updating an existing list.
+		 */
+	}
+
+	public void reset() {
+		// TODO Auto-generated method stub
+		
 	}
 }
