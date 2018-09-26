@@ -43,7 +43,7 @@ import com.example.mpcdemo.domain.RockLocation;
 import com.example.mpcdemo.domain.RockShow;
 import com.example.mpcdemo.domain.RockTourParametrization;
 import com.example.mpcdemo.domain.RockTourSolution;
-import com.example.mpcdemo.service.SolverService;
+import com.example.mpcdemo.service.SolutionInfo;
 
 public class RockTourGenerator {
 
@@ -64,7 +64,7 @@ public class RockTourGenerator {
 	public RockTourGenerator() {
 		solutionFileIO = new RockTourXlsxFileIO();
 		//TODO little funny. Change it.
-		outputDir = new File(SolverService.determineDataDir(SolverService.DATA_DIR_NAME), "unsolved");
+		outputDir = new File(SolutionInfo.determineDataDir(SolutionInfo.DATA_DIR_NAME), "unsolved");
 	}
 
 	private void writeSolution(LocationDataGenerator.LocationData[] locationDataArray) {

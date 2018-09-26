@@ -61,7 +61,7 @@ import com.example.mpcdemo.domain.RockLocation;
 import com.example.mpcdemo.domain.RockShow;
 import com.example.mpcdemo.domain.RockTourParametrization;
 import com.example.mpcdemo.domain.RockTourSolution;
-import com.example.mpcdemo.service.SolverService;
+import com.example.mpcdemo.service.SolutionInfo;
 
 public class RockTourXlsxFileIO extends AbstractXlsxSolutionFileIO<RockTourSolution> {
 
@@ -325,7 +325,7 @@ public class RockTourXlsxFileIO extends AbstractXlsxSolutionFileIO<RockTourSolut
     private static class RockTourXlsxWriter extends AbstractXlsxWriter<RockTourSolution> {
 
         public RockTourXlsxWriter(RockTourSolution solution) {
-            super(solution, SolverService.SOLVER_CONFIG);
+            super(solution, SolutionInfo.SOLVER_CONFIG);
         }
 
         @Override

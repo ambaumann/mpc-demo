@@ -40,13 +40,14 @@ import org.slf4j.LoggerFactory;
 import com.example.mpcdemo.common.ProblemFileComparator;
 import com.example.mpcdemo.common.TestSystemProperties;
 import com.example.mpcdemo.domain.RockTourSolution;
+import com.example.mpcdemo.service.SolutionInfo;
 import com.example.mpcdemo.service.SolverService;
 
 public class RockTourSolveAllTurtleTest{
 
 	protected final transient Logger logger = LoggerFactory.getLogger(getClass());
 	
-	protected SolverService commonApp;
+	protected SolutionInfo commonApp;
 	protected File dataFile;
 	
 	protected SolutionFileIO<RockTourSolution> solutionFileIO;
@@ -55,12 +56,12 @@ public class RockTourSolveAllTurtleTest{
 	
 	@Before
 	public void setup() {
-		SolverService solverService = new SolverService();
-		solverConfig = solverService.getSolverConfig();
-        this.commonApp = solverService;
+		SolutionInfo solutionInfo = new SolutionInfo();
+		solverConfig = solutionInfo.getSolverConfig();
+        this.commonApp = solutionInfo;
         
         // Just hard coding getting a single file for now.
-        this.dataFile = (File) getUnsolvedDirFilesAsParameters(solverService).get(0)[0];
+        this.dataFile = (File) getUnsolvedDirFilesAsParameters(solutionInfo).get(0)[0];
 		solutionFileIO = commonApp.createSolutionFileIO();
 	}
 	
@@ -73,9 +74,9 @@ public class RockTourSolveAllTurtleTest{
 //        super(new SolverService(), unsolvedDataFile);
 //    }
     
-    protected static <Solution_> List<Object[]> getUnsolvedDirFilesAsParameters(SolverService commonApp) {
+    protected static <Solution_> List<Object[]> getUnsolvedDirFilesAsParameters(SolutionInfo commonApp) {
         List<Object[]> filesAsParameters = new ArrayList<>();
-        File dataDir = SolverService.determineDataDir(commonApp.DATA_DIR_NAME);
+        File dataDir = SolutionInfo.determineDataDir(SolutionInfo.DATA_DIR_NAME);
         File unsolvedDataDir = new File(dataDir, "unsolved");
         if (!unsolvedDataDir.exists()) {
             throw new IllegalStateException("The directory unsolvedDataDir (" + unsolvedDataDir.getAbsolutePath()

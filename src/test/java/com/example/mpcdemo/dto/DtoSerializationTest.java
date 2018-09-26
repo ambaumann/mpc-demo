@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.example.mpcdemo.common.TestDataHelper;
 import com.example.mpcdemo.domain.dto.Solution;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,6 +29,7 @@ public class DtoSerializationTest {
 	}
 	
 	public <T> void testToJsonAndBack(T object) throws IOException {
+		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 		String json = objectMapper.writeValueAsString(object);
 		assertNotNull(json);
 		System.out.println(json);

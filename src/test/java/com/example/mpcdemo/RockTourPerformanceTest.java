@@ -39,7 +39,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.mpcdemo.domain.RockTourSolution;
-import com.example.mpcdemo.service.SolverService;
+import com.example.mpcdemo.service.SolutionInfo;
 
 public class RockTourPerformanceTest {
 
@@ -54,7 +54,7 @@ public class RockTourPerformanceTest {
 
 	@Before
 	public void setup() {
-		SolverService commonApp = new SolverService();
+		SolutionInfo commonApp = new SolutionInfo();
 		solutionFileIO = commonApp.createSolutionFileIO();
 		solverConfig = commonApp.getSolverConfig();
 	}

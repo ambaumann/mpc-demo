@@ -22,9 +22,11 @@ public class Solution {
 				})
 				// Convert
 				.map(rockShow -> SolutionEntry.createFromRockShow(rockShow)).collect(Collectors.toList());
+		solution.solutionName = rtSolution.getTourName();
 		return solution;
 	}
 
 	public String solutionName;
+	
 	public List<SolutionEntry> solutionEntries;
 }

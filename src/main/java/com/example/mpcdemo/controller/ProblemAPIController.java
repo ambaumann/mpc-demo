@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mpcdemo.domain.dto.Solution;
+import com.example.mpcdemo.domain.dto.SolutionState;
 import com.example.mpcdemo.domain.dto.UserInput;
 import com.example.mpcdemo.service.SolverService;
 
@@ -24,7 +25,7 @@ public class ProblemAPIController {
 	 * @return meh
 	 */
 	@GetMapping("/solver")
-	public boolean getSolutionStatus() {
+	public SolutionState getSolutionStatus() {
 		return solverService.getSolverStatus();
 	}
 	

@@ -1,77 +1,70 @@
 package com.example.mpcdemo.service;
 
-import java.io.File;
-
-import org.optaplanner.persistence.common.api.domain.solution.SolutionFileIO;
+import org.optaplanner.core.api.solver.Solver;
+import org.optaplanner.core.api.solver.SolverFactory;
+import org.optaplanner.core.config.solver.EnvironmentMode;
+import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.springframework.stereotype.Service;
 
 import com.example.mpcdemo.domain.RockTourSolution;
 import com.example.mpcdemo.domain.dto.Solution;
+import com.example.mpcdemo.domain.dto.SolutionState;
 import com.example.mpcdemo.domain.dto.UserInput;
-import com.example.mpcdemo.persistence.RockTourXlsxFileIO;
+import com.example.mpcdemo.persistence.RockTourHardCodeAndDBIO;
 
 
 @Service
 public class SolverService {
+	
+	public SolutionState state;
+	
+	RockTourSolution solution;
+	
+	String solverConfig;
 
-	public static final String SOLVER_CONFIG = "org/optaplanner/examples/rocktour/solver/rockTourSolverConfig.xml";
-
-	public static final String DATA_DIR_NAME = "rocktour";
-
-	// TODO change this.
-
-	/**
-	 * The path to the data directory, preferably with unix slashes for portability.
-	 * For example: -D{@value #DATA_DIR_SYSTEM_PROPERTY}=sources/data/
-	 */
-	public static final String DATA_DIR_SYSTEM_PROPERTY = "org.optaplanner.examples.dataDir";
-
-	public static File determineDataDir(String dataDirName) {
-		String dataDirPath = System.getProperty(DATA_DIR_SYSTEM_PROPERTY, "data/");
-		File dataDir = new File(dataDirPath, dataDirName);
-		if (!dataDir.exists()) {
-			throw new IllegalStateException("The directory dataDir (" + dataDir.getAbsolutePath()
-					+ ") does not exist.\n"
-					+ " Either the working directory should be set to the directory that contains the data directory"
-					+ " (which is not the data directory itself), or the system property " + DATA_DIR_SYSTEM_PROPERTY
-					+ " should be set properly.\n"
-					+ " The data directory is different in a git clone (optaplanner/optaplanner-examples/data)"
-					+ " and in a release zip (examples/sources/data).\n"
-					+ " In an IDE (IntelliJ, Eclipse, NetBeans), open the \"Run configuration\""
-					+ " to change \"Working directory\" (or add the system property in \"VM options\").");
-		}
-		return dataDir;
+	public SolverService() {
+		solution = RockTourHardCodeAndDBIO.read();
+		SolutionInfo commonApp = new SolutionInfo();
+		solverConfig = commonApp.getSolverConfig();
 	}
-
-	public SolutionFileIO<RockTourSolution> createSolutionFileIO() {
-		return new RockTourXlsxFileIO();
-	}
-
-	public String getSolverConfig() {
-		return SOLVER_CONFIG;
-	}
-
+	
 	public boolean isFinalSolutionReady() {
-		// TODO Auto-generated method stub
-		return false;
+		return state.equals(SolutionState.COMPLETE);
 	}
 
 	public Solution getFinalSolution() {
-		// TODO Auto-generated method stub
-		return null;
+		if(!state.equals(SolutionState.COMPLETE)) {
+			// maybe throw error
+			return null;
+		}
+		return Solution.createFromSolvedRockTourSolution(solution);
 	}
 
 	public void solveSolution() {
 		// TODO Auto-generated method stub
+		
+		state = SolutionState.RUNNING;
+		//TODO make the following async.
+		SolverFactory<RockTourSolution> solverFactory = buildSolverFactory(EnvironmentMode.FAST_ASSERT);
+		Solver<RockTourSolution> solver = solverFactory.buildSolver();
+		RockTourSolution bestSolution = solver.solve(solution);
+		solution = bestSolution;
+		state = SolutionState.COMPLETE;
 	}
 
-	public boolean getSolverStatus() {
+	public SolutionState getSolverStatus() {
 		// TODO Auto-generated method stub
-		return isFinalSolutionReady();
+		return state;
+		
 	}
 	
 	public void addUserInput(UserInput userInput) {
-		// TODO Auto-generated method stub
+		if(!state.equals(SolutionState.INITIALIZED)) {
+			//TODO log error.
+			return;
+		}
+		
+		// TODO modify local solution.
 		/**
 		 * Add $$ to existing revenue opportunity for each user input.
 		 * still up in the air what will be in the user input. May be adding a new location of just updating an existing list.
@@ -79,7 +72,20 @@ public class SolverService {
 	}
 
 	public void reset() {
-		// TODO Auto-generated method stub
+		this.solution = RockTourHardCodeAndDBIO.read();
 		
+	}
+	
+	protected SolverFactory<RockTourSolution> buildSolverFactory(EnvironmentMode environmentMode) {
+		SolverFactory<RockTourSolution> solverFactory = SolverFactory.createFromXmlResource(solverConfig);
+		solverFactory.getSolverConfig().setEnvironmentMode(environmentMode);
+		solverFactory.getSolverConfig()
+				.setTerminationConfig(new TerminationConfig().withMinutesSpentLimit(1L));
+				// TODO figure out best termination config
+				//.setTerminationConfig(new TerminationConfig().withBestScoreLimit(bestScoreLimitString));
+		// TODO this is currently not avalable
+		// solverFactory.getSolverConfig().setMoveThreadCount(moveThreadCount);
+
+		return solverFactory;
 	}
 }

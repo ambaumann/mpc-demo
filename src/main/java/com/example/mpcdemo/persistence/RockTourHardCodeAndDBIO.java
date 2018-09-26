@@ -74,6 +74,7 @@ public class RockTourHardCodeAndDBIO {
 		parametrization.setDrivingTimeCostPerSecond(1);
 		// "Cost per day for each day that a visit is later in the schedule."
 		parametrization.setDelayCostPerDay(30);
+		parametrization.setId(1L);
 		solution.setParametrization(parametrization);
 	}
 
@@ -90,6 +91,7 @@ public class RockTourHardCodeAndDBIO {
 		double endLongitude = -86.300568;
 		bus.setEndLocation(new RockLocation(endCityName, endLatitude, endLongitude));
 		bus.setEndDate(LocalDate.parse("Sat 2018-12-01", DAY_FORMATTER));
+		bus.setId(1L);
 		solution.setBus(bus);
 
 	}
