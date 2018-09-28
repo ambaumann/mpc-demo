@@ -3,13 +3,13 @@ package com.example.mpcdemo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mpcdemo.domain.dto.Solution;
 import com.example.mpcdemo.domain.dto.SolutionState;
-import com.example.mpcdemo.domain.dto.UserInput;
+import com.example.mpcdemo.service.CacheService;
 import com.example.mpcdemo.service.SolverService;
 
 @RestController
@@ -72,8 +72,28 @@ public class ProblemAPIController {
 	 * Reset the solver service to delete previous user input
 	 * @param userInput
 	 */
-	@PostMapping("/solver/userinput")
+	/*@PostMapping("/solver/userinput")
 	public void addUserInput(@RequestBody UserInput userInput) {
 		solverService.addUserInput(userInput);
+	}*/
+	
+	
+	@PostMapping("/solver/userinput")
+	public void addUserInput(@RequestParam("accountId") String accountId) {
+		solverService.addUserInput(accountId);
+	}
+
+	
+	@GetMapping("/solver/printcache")
+	public void printCache() {
+		CacheService cacheService = CacheService.getInstance();
+		cacheService.printCache();
+	}
+	
+	//TODO: change to @PostMapping("/solver/action/reset")
+	@GetMapping("/solver/initcache")
+	public void initCache() {
+		CacheService cacheService = CacheService.getInstance();
+		cacheService.initializeCache();
 	}
 }

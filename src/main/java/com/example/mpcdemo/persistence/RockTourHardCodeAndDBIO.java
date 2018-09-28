@@ -18,11 +18,13 @@ import java.util.stream.Stream;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.example.mpcdemo.domain.MPCAccount;
 import com.example.mpcdemo.domain.RockBus;
 import com.example.mpcdemo.domain.RockLocation;
 import com.example.mpcdemo.domain.RockShow;
 import com.example.mpcdemo.domain.RockTourParametrization;
 import com.example.mpcdemo.domain.RockTourSolution;
+import com.example.mpcdemo.service.CacheService;
 
 /**
  * Class that handles reading hard coded initial solution **as if the solution
@@ -101,7 +103,7 @@ public class RockTourHardCodeAndDBIO {
 		LocalDate endDate = solution.getBus().getEndDate();
 		// TODO maybe compare hard set dates are in between start and end?
 		List<RockShow> showList = new ArrayList<>();
-		showList.add(one());
+		/*showList.add(one());
 		showList.add(two());
 		showList.add(three());
 		showList.add(four());
@@ -110,12 +112,26 @@ public class RockTourHardCodeAndDBIO {
 		showList.add(seven());
 		showList.add(eight());
 		showList.add(nine());
-		showList.add(ten());
+		showList.add(ten());*/
+		RockShow rockShow;
+		
+		//loading from accounts.json
+		CacheService cacheService = CacheService.getInstance();
+		MPCAccount[] accounts = cacheService.loadDefaultAccountData();
+		for(MPCAccount account: accounts) {
+			//accountsCache.put(account.getAccountId(), account);
+			NavigableSet<LocalDate> availableDateSet = new TreeSet<>();
+			availableDateSet.add(account.getAvailableDate());
+			//TODO: fix duration
+			rockShow = createRockShow((long)account.getAccountId(), account.getVenueName(), account.getCity(), account.getLatitude(), account.getLongitude(), 1.0, account.getRevenueOpportunity(), true, availableDateSet);
+			showList.add(rockShow);
+		}
+		
 		solution.setShowList(showList);
 
 	}
 
-	private static RockShow one() {
+	/*private static RockShow one() {
 		NavigableSet<LocalDate> availableDateSet = new TreeSet<>();
 		availableDateSet.add(LocalDate.of(2018, 10, 15));
 		availableDateSet.add(LocalDate.of(2018, 11, 29));
@@ -178,6 +194,7 @@ public class RockTourHardCodeAndDBIO {
 		return createRockShow(10L, "T10", "Seattle, Washington", 47.6062, -122.3321, 1.0, 1500000, true,
 				availableDateSet);
 	}
+	*/
 
 	private static RockShow createRockShow(Long id, String venueName, String cityName, Double latitude,
 			Double longitude, Double duration, int revenueOpportunity, boolean required,

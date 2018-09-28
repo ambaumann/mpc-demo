@@ -32,6 +32,15 @@ public class SolverServiceTest {
 		printSolution(solution);
 	}
 	
+	@Test
+	public void userInputTest() throws JsonProcessingException {
+		solver.addUserInput("103");
+		solver.addUserInput("104");
+		solver.addUserInput("103");
+		CacheService cacheService = CacheService.getInstance();
+		cacheService.printCache();
+	}
+	
 	private void printSolution(Solution solution) throws JsonProcessingException {
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		String json = mapper.writeValueAsString(solution);

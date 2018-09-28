@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.example.mpcdemo.domain.RockTourSolution;
 import com.example.mpcdemo.domain.dto.Solution;
 import com.example.mpcdemo.domain.dto.SolutionState;
-import com.example.mpcdemo.domain.dto.UserInput;
 import com.example.mpcdemo.persistence.RockTourHardCodeAndDBIO;
 
 
@@ -21,11 +20,14 @@ public class SolverService {
 	RockTourSolution solution;
 	
 	String solverConfig;
+	
+	public CacheService cacheService;
 
 	public SolverService() {
 		solution = RockTourHardCodeAndDBIO.read();
 		SolutionInfo commonApp = new SolutionInfo();
 		solverConfig = commonApp.getSolverConfig();
+		cacheService = CacheService.getInstance();
 	}
 	
 	public boolean isFinalSolutionReady() {
@@ -57,18 +59,22 @@ public class SolverService {
 		return state;
 		
 	}
-	
-	public void addUserInput(UserInput userInput) {
-		if(!state.equals(SolutionState.INITIALIZED)) {
-			//TODO log error.
-			return;
-		}
+		
+	public void addUserInput(String accountId) {
+		/*if(!state.equals(SolutionState.INITIALIZED)) {
+		//TODO log error.
+		return;
+		}*/
+		
+		cacheService.addUserInput(accountId);
+		
 		
 		// TODO modify local solution.
 		/**
 		 * Add $$ to existing revenue opportunity for each user input.
 		 * still up in the air what will be in the user input. May be adding a new location of just updating an existing list.
 		 */
+		
 	}
 
 	public void reset() {
