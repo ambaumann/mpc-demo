@@ -5,15 +5,11 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import org.apache.tomcat.jni.Address;
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.configuration.Configuration;
 import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
-import org.infinispan.commons.util.CloseableIterable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +23,8 @@ public class CacheService {
 	private static CacheService singleton = null;
 	
 	private RemoteCache<Integer, MPCAccount> accountsCache;
-	private MPCAccount[] accounts;
+	private MPCAccount[] defaultAccounts;
+
 	File file;
 
 	public static  CacheService getInstance() {
@@ -62,25 +59,31 @@ public class CacheService {
 		accountsCache = rcm.getCache("default");
 	}
 	
+	public MPCAccount[] getDefaultAccounts() {
+		return this.defaultAccounts;
+	}
+	
 	public MPCAccount[] getAccounts() {
+		MPCAccount[] accounts;
 		
 		if (accountsCache.isEmpty()) { //load from accounts.json and update cache
 			System.out.println("empty cache");
 			initializeCache();
+			accounts = this.defaultAccounts;
 		}
 		else { //load data from cache
 			List<MPCAccount> accountsList = new ArrayList<MPCAccount>();
 			accountsCache.entrySet().forEach(entry -> accountsList.add((MPCAccount)entry.getValue()));
 			accountsCache.entrySet().forEach(entry -> System.out.printf("%s = %s\n", entry.getKey(), ((MPCAccount)entry.getValue()).getVenueName() + " " + ((MPCAccount)entry.getValue()).getRequestCount()));
-			accounts = accountsList.toArray(accounts);
+			accounts = accountsList.toArray(new MPCAccount[accountsList.size()]);
 		}
 		return accounts;
 		
 	}
 	
 	public void initializeCache() {
-		accounts = loadDefaultAccountData();
-		saveAccounts(accounts);
+		defaultAccounts = loadDefaultAccountData();
+		saveAccounts(defaultAccounts);
 	}
 	
 	public MPCAccount[] loadDefaultAccountData() {
@@ -88,16 +91,9 @@ public class CacheService {
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
 
-			//File file = ResourceUtils.getFile("/accounts.json");
-			/*URL url = ClassLoader.getSystemResource("accounts.json");
-			System.out.println("url:" + url.toString() );
-			File file = new File(this.getResource("accounts.json").getFile());
-			
-			file = ResourceUtils.getFile("classpath:accounts.json");*/
-			//File file = ResourceUtils.getFile("accounts.json");
+
 			InputStream is = new ClassPathResource("accounts.json").getInputStream();
 			
-			//MPCAccount[] accounts =  objectMapper.readValue(file, MPCAccount[].class);
 			MPCAccount[] accounts =  objectMapper.readValue(is, MPCAccount[].class);
 			for (MPCAccount account: accounts) {
 				System.out.println("account: " + account.getVenueName() + " :: " + account.getAccountId());

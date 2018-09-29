@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.mpcdemo.domain.MPCAccount;
 import com.example.mpcdemo.domain.dto.Solution;
 import com.example.mpcdemo.domain.dto.SolutionState;
 import com.example.mpcdemo.service.CacheService;
@@ -18,6 +19,9 @@ public class ProblemAPIController {
 
 	@Autowired
 	public SolverService solverService;
+	
+	@Autowired
+	public CacheService cacheService;
 	
 	/**
 	 * Endpoint to pull to know when solver is finished
@@ -67,17 +71,17 @@ public class ProblemAPIController {
 		}
 	}
 	
+
+	@GetMapping("/solver/defaultaccounts")
+	 public MPCAccount[] getDefaultAcconts(){
+		 	return cacheService.getDefaultAccounts();
+	 }
+
 	/**
 	 * Add User Input to the solver before solving.
 	 * Reset the solver service to delete previous user input
 	 * @param userInput
 	 */
-	/*@PostMapping("/solver/userinput")
-	public void addUserInput(@RequestBody UserInput userInput) {
-		solverService.addUserInput(userInput);
-	}*/
-	
-	
 	@PostMapping("/solver/userinput")
 	public void addUserInput(@RequestParam("accountId") String accountId) {
 		solverService.addUserInput(accountId);

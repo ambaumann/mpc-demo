@@ -1,7 +1,7 @@
  [{
     "accountId"	 : 101,
     "venueName" : "A1",
-    "city" : "Phoenix, California",
+    "city" : "Phoenix, Arizona",
     "latitude" : 33.4484,
     "longitude" : -112.074,
     "revenueOpportunity" : 100000,
