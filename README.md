@@ -51,5 +51,8 @@ CacheService can be configured to use the local JDG cache
 * run ./standalone.sh @ [JDG-HOME]/bin
 * comment and uncomment jdgServerHost and jdgServerPort lines in CacheService to switch to local JDG instance
 
+<<<<<<< HEAD
 Deploying to Ravello:
 * mvn package fabric8:deploy -DskipTests
+=======
+>>>>>>> ecc7ba9fd3c42cc8af3b3b532eae98d1a1940228
