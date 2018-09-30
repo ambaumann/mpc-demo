@@ -1,4 +1,3 @@
-=======
 ## Overview
 
 Spring Boot REST Application Andrew Bauman MPC Demo.
