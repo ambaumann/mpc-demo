@@ -46,12 +46,12 @@ public class CacheService {
 		String jdgServerPort = System.getenv("DATAGRID_APP_HOTROD_SERVICE_PORT");
 	
 		// Catch and handle null values
-		jdgServerHost = (jdgServerHost == null) ? "datagrid-app-hotrod" : jdgServerHost;
+		//jdgServerHost = (jdgServerHost == null) ? "datagrid-app-hotrod" : jdgServerHost;
 		jdgServerPort = (jdgServerPort == null) ? "11333" : jdgServerPort;
 	
 		//local JDG cache for testing
-		//jdgServerHost = (jdgServerHost == null) ? "127.0.0.1" : jdgServerHost;
-		//jdgServerPort = (jdgServerPort == null) ? "11222" : jdgServerPort;
+		jdgServerHost = (jdgServerHost == null) ? "127.0.0.1" : jdgServerHost;
+		//jdgServerPort = (jdgServerPort == null) ? "11322" : jdgServerPort;
 	
 		String serverEndpoint = jdgServerHost.concat(":").concat(jdgServerPort);
 		Configuration configuration = new ConfigurationBuilder().addServers(serverEndpoint).build();
@@ -134,8 +134,29 @@ public class CacheService {
 		}
 	}
 	
+	/*public MPCAccount[] getSelectedAccounts() {
+		accountsCache.entrySet().forEach(entry -> System.out.printf("%s = %s\n", entry.getKey(), ((MPCAccount)entry.getValue()).getVenueName() + " " + ((MPCAccount)entry.getValue()).getRequestCount()));
+		ArrayList<MPCAccount> selectedAccountsList = new ArrayList<MPCAccount>();
+		MPCAccount account;
+		
+	    Set<Integer> keySet = accountsCache.keySet();
+	    Iterator<Integer> i = keySet.iterator();
+	    System.out.println("============= selected accounts from cache");
+	    while (i.hasNext()) {
+	        Object key = i.next();
+	        System.out.println("> key=" + key);
+	        account = (MPCAccount)accountsCache.get(key);
+	        selectedAccountsList.add(account);
+	        System.out.println("> value=" + account.getVenueName());
+	        System.out.println(" ");
+	    }
+	    MPCAccount[] selectedAccounts = selectedAccountsList.toArray(new MPCAccount[selectedAccountsList.size()]);
+	    return selectedAccounts;
+	}*/
+	
 	public void printCache() {
 		System.out.println("printing cache entries");
+		//TODO: handle entries that are not MPCAccount type 
 		accountsCache.entrySet().forEach(entry -> System.out.printf("%s = %s\n", entry.getKey(), ((MPCAccount)entry.getValue()).getVenueName() + " " + ((MPCAccount)entry.getValue()).getRequestCount()));
 		//MPCAccount account = accountsCache.get(101);
 		//System.out.println(account.getVenueName() + account.getCity());

@@ -1,6 +1,9 @@
 package com.example.mpcdemo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mpcdemo.domain.MPCAccount;
-import com.example.mpcdemo.domain.dto.Solution;
 import com.example.mpcdemo.domain.dto.SolutionState;
 import com.example.mpcdemo.service.CacheService;
 import com.example.mpcdemo.service.SolverService;
@@ -61,10 +63,10 @@ public class ProblemAPIController {
 	 * @return solved solution
 	 */
 	@GetMapping("solver/solution")
-	public Solution getSolution() {
+	public List<MPCAccount> getSolution() {
 		
 		if(solverService.isFinalSolutionReady()) {
-			return solverService.getFinalSolution();
+			return solverService.getOrderedAccounts();
 		} else {
 			// TODO handle error.
 			return null;
@@ -72,22 +74,30 @@ public class ProblemAPIController {
 	}
 	
 
+	@CrossOrigin(origins = "*", maxAge = 3600)
 	@GetMapping("/solver/defaultaccounts")
-	 public MPCAccount[] getDefaultAcconts(){
-		 	return cacheService.getDefaultAccounts();
-	 }
+	public MPCAccount[] getDefaultAcconts(){
+		return cacheService.getDefaultAccounts();
+	}
 
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@GetMapping("/solver/selectedaccounts")
+	public MPCAccount[] getSelectedAccounts(){
+		return cacheService.getAccounts();
+	}
+	
 	/**
 	 * Add User Input to the solver before solving.
 	 * Reset the solver service to delete previous user input
 	 * @param userInput
 	 */
+	@CrossOrigin(origins = "*", maxAge = 3600)
 	@PostMapping("/solver/userinput")
 	public void addUserInput(@RequestParam("accountId") String accountId) {
-		solverService.addUserInput(accountId);
+		cacheService.addUserInput(accountId);
 	}
 
-	
+	@CrossOrigin(origins = "*", maxAge = 3600)
 	@GetMapping("/solver/printcache")
 	public void printCache() {
 		CacheService cacheService = CacheService.getInstance();
@@ -95,6 +105,7 @@ public class ProblemAPIController {
 	}
 	
 	//TODO: change to @PostMapping("/solver/action/reset")
+	@CrossOrigin(origins = "*", maxAge = 3600)
 	@GetMapping("/solver/initcache")
 	public void initCache() {
 		CacheService cacheService = CacheService.getInstance();

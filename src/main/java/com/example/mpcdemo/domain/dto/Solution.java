@@ -4,13 +4,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.mpcdemo.domain.MPCAccount;
 import com.example.mpcdemo.domain.RockShow;
 import com.example.mpcdemo.domain.RockTourSolution;
 
 public class Solution {
 	public static Solution createFromSolvedRockTourSolution(RockTourSolution rtSolution) {
 		Solution solution = new Solution();
-		solution.solutionEntries = rtSolution.getShowList().stream()
+		solution.accounts = rtSolution.getShowList().stream()
 				// Sort
 				.sorted(new Comparator<RockShow>() {
 					@Override
@@ -21,12 +22,12 @@ public class Solution {
 					}
 				})
 				// Convert
-				.map(rockShow -> SolutionEntry.createFromRockShow(rockShow)).collect(Collectors.toList());
+				.map(rockShow -> MPCAccount.createFromRockShow(rockShow)).collect(Collectors.toList());
 		solution.solutionName = rtSolution.getTourName();
 		return solution;
 	}
 
 	public String solutionName;
 	
-	public List<SolutionEntry> solutionEntries;
+	public List<MPCAccount> accounts;
 }

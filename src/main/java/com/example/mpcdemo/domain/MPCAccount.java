@@ -14,6 +14,19 @@ public class MPCAccount implements java.io.Serializable{
 	private int revenueOpportunity;
 	private int requestCount = 0;
 	
+	public static MPCAccount createFromRockShow(RockShow rockShow) {
+		MPCAccount mpcAccount = new MPCAccount();
+		mpcAccount.accountId = rockShow.getId().intValue();//TODO: null condition check
+		mpcAccount.venueName = rockShow.getVenueName();
+		//NOT null checks/ guards
+		mpcAccount.city = rockShow.getLocation().getCityName();
+		mpcAccount.latitude = rockShow.getLocation().getLatitude();
+		mpcAccount.longitude = rockShow.getLocation().getLongitude();
+		mpcAccount.revenueOpportunity = rockShow.getRevenueOpportunity();
+		mpcAccount.availableDate = rockShow.getDate();
+		return mpcAccount;
+	}
+
 	public MPCAccount() {
 		
 	}
@@ -70,7 +83,8 @@ public class MPCAccount implements java.io.Serializable{
 	}
 
 	public int getRevenueOpportunity() {
-		return revenueOpportunity;
+		//return revenueOpportunity;
+		return revenueOpportunity * requestCount;
 	}
 
 	public void setRevenueOpportunity(int revenueOpportunity) {
@@ -83,7 +97,7 @@ public class MPCAccount implements java.io.Serializable{
 
 	public void setRequestCount(int requestCount) {
 		this.requestCount = requestCount;
-		this.revenueOpportunity  += this.revenueOpportunity * requestCount;
+		//this.revenueOpportunity  += this.revenueOpportunity * requestCount;
 	}
 	
 	
