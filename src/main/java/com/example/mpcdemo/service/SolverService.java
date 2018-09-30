@@ -1,12 +1,10 @@
 package com.example.mpcdemo.service;
 
 import java.util.List;
-
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.solver.EnvironmentMode;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.example.mpcdemo.domain.MPCAccount;
@@ -19,7 +17,7 @@ import com.example.mpcdemo.persistence.RockTourIO;
 @Service
 public class SolverService {
 	
-	public SolutionState state;
+	public SolutionState state = SolutionState.NOTREADY;
 	
 	RockTourSolution solution;
 	
@@ -53,9 +51,11 @@ public class SolverService {
 		return Solution.createFromSolvedRockTourSolution(solution);
 	}
 
-	//@Async
-	public void solveSolution() {
+	public void solveSolution(){
 		// TODO Auto-generated method stub
+		if (state.equals(SolutionState.RUNNING))
+			return;
+		
 		solution = RockTourIO.read();
 		state = SolutionState.RUNNING;
 		//TODO make the following async.
@@ -63,10 +63,14 @@ public class SolverService {
 		Solver<RockTourSolution> solver = solverFactory.buildSolver();
 		RockTourSolution bestSolution = solver.solve(solution);
 		solution = bestSolution;
-		//Thread.sleep(1000L);
 		state = SolutionState.COMPLETE;
 	}
 
+	public void solverSolutionAsync() {
+		
+		new Thread(() -> solveSolution()).start();
+	}
+	
 	public SolutionState getSolverStatus() {
 		// TODO Auto-generated method stub
 		return state;
