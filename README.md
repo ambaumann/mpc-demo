@@ -45,3 +45,10 @@ Swagger UI can be accessed with the following link:
 ### Exposed Endpoints
 
 All exposed endpoints can be found using the [swagger api documentation](http://localhost:9999/v2/api-docs) or the [swagger-ui page](http://localhost:9999/swagger-ui.html).
+
+# mpc-demo
+CacheService can be configured to use the local JDG cache
+* Download "Data Grid" from https://developers.redhat.com/products/datagrid/download/
+* run ./standalone.sh @ [JDG-HOME]/bin
+* comment and uncomment jdgServerHost and jdgServerPort lines in CacheService to switch to local JDG instance
+
