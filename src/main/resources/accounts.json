@@ -1,6 +1,6 @@
  [{
     "accountId"	 : 101,
-    "venueName" : "A1",
+    "venueName" : "AMEX",
     "city" : "Phoenix, Arizona",
     "latitude" : 33.4484,
     "longitude" : -112.074,
@@ -8,7 +8,7 @@
     "availableDate" : "2018-11-29"
   },{
     "accountId"	 : 102,
-    "venueName" : "V2",
+    "venueName" : "Visa",
     "city" : "Foster City, California",
     "latitude" : 37.5585,
     "longitude" : -122.2711,
@@ -16,7 +16,7 @@
     "availableDate" : "2018-10-18"
   },{
 	"accountId"	 : 103,
-    "venueName" : "E3",
+    "venueName" : "Exxon",
     "city" : "Dallas, Texas",
     "latitude" : 32.7767,
     "longitude" : -96.797,
@@ -24,7 +24,7 @@
     "availableDate" : "2018-10-17"
   },  {
     "accountId"	 : 104,
-    "venueName" : "P4",
+    "venueName" : "Pemex",
     "city" : "Mexico City, Mexico",
     "latitude" : 19.4326,
     "longitude" : -99.1332,
@@ -32,7 +32,7 @@
     "availableDate" : "2018-10-22"
   }, {
     "accountId"	 : 105,
-    "venueName" : "D5",
+    "venueName" : "Discover",
     "city" : "Chicago, Illinois",
     "latitude" : 41.8781,
     "longitude" : -87.6298,
@@ -40,7 +40,7 @@
     "availableDate" : "2018-10-24"
   }, {
     "accountId"	 : 106,
-    "venueName" : "M6",
+    "venueName" : "Macys",
     "city" : "Rochester, New York",
     "latitude" : 39.1031,
     "longitude" : -84.512,
@@ -48,7 +48,7 @@
     "availableDate" : "2018-10-23"
   }, {
     "accountId"	 : 107,
-    "venueName" : "R7",
+    "venueName" : "RBC",
     "city" : "Toronto, Canada",
     "latitude" : 43.6532,
     "longitude" : -79.3832,
@@ -56,7 +56,7 @@
     "availableDate" : "2018-10-25"
   }, {
     "accountId"	 : 108,
-    "venueName" : "C8",
+    "venueName" : "Citibank",
     "city" : "New York, New York",
     "latitude" : 40.7128,
     "longitude" : -74.006,
@@ -64,7 +64,7 @@
     "availableDate" : "2018-10-16"
   },{
     "accountId"	 : 109,
-    "venueName" : "9D",
+    "venueName" : "Delta",
     "city" : "Atlanta, Georgia",
     "latitude" : 33.749027,
     "longitude" : -84.388229,
@@ -72,7 +72,7 @@
     "availableDate" : "2018-11-19"
   },{
     "accountId"	 : 110,
-    "venueName" : "T10",
+    "venueName" : "T-Mobile",
     "city" : "Seattle, Washington",
     "latitude" : 47.6062,
     "longitude" : -122.3321,

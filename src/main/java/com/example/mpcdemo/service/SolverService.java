@@ -22,14 +22,11 @@ public class SolverService {
 	RockTourSolution solution;
 	
 	String solverConfig;
-	
-	public CacheService cacheService;
 
 	public SolverService() {
 		//solution = RockTourHardCodeAndDBIO.read(); //moved to solveSolution()
 		SolutionInfo commonApp = new SolutionInfo();
 		solverConfig = commonApp.getSolverConfig();
-		cacheService = CacheService.getInstance();
 	}
 	
 	public boolean isFinalSolutionReady() {
@@ -76,23 +73,6 @@ public class SolverService {
 		return state;
 		
 	}
-		
-	/*public void addUserInput(String accountId) {
-		if(!state.equals(SolutionState.INITIALIZED)) {
-		//TODO log error.
-		return;
-		}
-		
-		cacheService.addUserInput(accountId);
-		
-		
-		// TODO modify local solution.
-		**
-		 * Add $$ to existing revenue opportunity for each user input.
-		 * still up in the air what will be in the user input. May be adding a new location of just updating an existing list.
-		 
-		
-	}*/
 
 	public void reset() {
 		this.solution = RockTourIO.read();

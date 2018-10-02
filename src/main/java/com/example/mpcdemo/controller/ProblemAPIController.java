@@ -42,7 +42,6 @@ public class ProblemAPIController {
 	// not too restful of a rest endpoint but meh
 	@PostMapping("/solver/action/solve")
 	public void solveSolution() throws InterruptedException{
-		//solverService.solveSolution();
 		solverService.solverSolutionAsync();
 	}
 	
@@ -83,8 +82,8 @@ public class ProblemAPIController {
 
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@GetMapping("/solver/selectedaccounts")
-	public MPCAccount[] getSelectedAccounts(){
-		//solverService.solveSolution();
+	public MPCAccount[] getSelectedAccounts() throws InterruptedException {
+		solveSolution(); //calling async solve solution preemptively
 		return cacheService.getAccounts();
 	}
 	

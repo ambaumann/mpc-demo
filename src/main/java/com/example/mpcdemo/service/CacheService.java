@@ -82,6 +82,7 @@ public class CacheService {
 	}
 	
 	public void initializeCache() {
+		accountsCache.clear();
 		defaultAccounts = loadDefaultAccountData();
 		saveAccounts(defaultAccounts);
 	}
