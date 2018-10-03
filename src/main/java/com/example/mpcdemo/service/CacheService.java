@@ -4,7 +4,9 @@ package com.example.mpcdemo.service;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
@@ -60,6 +62,9 @@ public class CacheService {
 	}
 	
 	public MPCAccount[] getDefaultAccounts() {
+		if (this.defaultAccounts==null) {
+			defaultAccounts = loadDefaultAccountData();
+		}
 		return this.defaultAccounts;
 	}
 	
@@ -96,6 +101,7 @@ public class CacheService {
 			InputStream is = new ClassPathResource("accounts.json").getInputStream();
 			
 			MPCAccount[] accounts =  objectMapper.readValue(is, MPCAccount[].class);
+			System.out.println("loading default accounts from accounts.json");
 			for (MPCAccount account: accounts) {
 				System.out.println("account: " + account.getVenueName() + " :: " + account.getAccountId());
 			}
@@ -111,6 +117,31 @@ public class CacheService {
 		}
 	}
 	
+	public MPCAccount[] loadAllAccountData() {
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			objectMapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
+
+			InputStream is = new ClassPathResource("extra-accounts.json").getInputStream();
+			
+			MPCAccount[] extraAccounts =  objectMapper.readValue(is, MPCAccount[].class);
+			System.out.println("loading extra accounts from extra-accounts.json");
+			for (MPCAccount account: extraAccounts) {
+				System.out.println("account: " + account.getVenueName() + " :: " + account.getAccountId());
+			}
+			
+			MPCAccount[] allAccounts = Stream.concat(Arrays.stream(extraAccounts), Arrays.stream(defaultAccounts)).toArray(MPCAccount[]::new);
+			
+			return allAccounts;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			//TODO: load hard coded data 
+			//RockTourHardCodeAndDBIO.readShowList
+			return null;
+			
+		}
+	}	
 	
 	public void saveAccounts(MPCAccount[] accounts) {
 		//adding the accounts to default cache

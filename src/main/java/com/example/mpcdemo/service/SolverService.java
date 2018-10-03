@@ -83,7 +83,8 @@ public class SolverService {
 		SolverFactory<RockTourSolution> solverFactory = SolverFactory.createFromXmlResource(solverConfig);
 		solverFactory.getSolverConfig().setEnvironmentMode(environmentMode);
 		solverFactory.getSolverConfig()
-				.setTerminationConfig(new TerminationConfig().withMinutesSpentLimit(1L));
+				.setTerminationConfig(new TerminationConfig().withSecondsSpentLimit(20L));
+						//.withMinutesSpentLimit(1L));
 				// TODO figure out best termination config
 				//.setTerminationConfig(new TerminationConfig().withBestScoreLimit(bestScoreLimitString));
 		// TODO this is currently not avalable

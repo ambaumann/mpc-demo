@@ -73,10 +73,15 @@ public class ProblemAPIController {
 		}
 	}
 	
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@GetMapping("/solver/allaccounts")
+	public MPCAccount[] getAlltAccounts(){
+		return cacheService.loadAllAccountData();
+	}
 
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@GetMapping("/solver/defaultaccounts")
-	public MPCAccount[] getDefaultAcconts(){
+	public MPCAccount[] getDefaultAccounts(){
 		return cacheService.getDefaultAccounts();
 	}
 

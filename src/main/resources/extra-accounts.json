@@ -1,0 +1,83 @@
+ [{
+    "accountId"	 : 1,
+    "venueName" : "USAA",
+    "city" : "San Antonio, Texas",
+    "latitude" : 29.4241,
+    "longitude" : -98.4936,
+    "revenueOpportunity" : 1,
+    "availableDate" : "2018-01-01"
+  },{
+    "accountId"	 : 2,
+    "venueName" : "Kaiser",
+    "city" : "Englewood, Colorado",
+    "latitude" : 39.6478,
+    "longitude" : -104.9878,
+    "revenueOpportunity" : 1,
+    "availableDate" : "2018-01-01"
+  },{
+    "accountId"	 : 3,
+    "venueName" : "Best Buy",
+    "city" : "Minneapolis, Minnesota",
+    "latitude" : 44.9778,
+    "longitude" : -93.265,
+    "revenueOpportunity" : 1,
+    "availableDate" : "2018-01-01"
+  },{
+    "accountId"	 : 4,
+    "venueName" : "Nike",
+    "city" : "Portland, Oregon",
+    "latitude" : 45.5122,
+    "longitude" : -122.6587,
+    "revenueOpportunity" : 1,
+    "availableDate" : "2018-01-01"
+  },{
+    "accountId"	 : 5,
+    "venueName" : "Sprint",
+    "city" : "Overland Park, Kansas",
+    "latitude" : 38.9822,
+    "longitude" : -94.6708,
+    "revenueOpportunity" : 1,
+    "availableDate" : "2018-01-01"
+  },{
+    "accountId"	 : 6,
+    "venueName" : "Kraft Heinz",
+    "city" : "Pittsburgh, PA",
+    "latitude" : 40.4406,
+    "longitude" : -79.9959,
+    "revenueOpportunity" : 1,
+    "availableDate" : "2018-01-01"
+  },{
+    "accountId"	 : 7,
+    "venueName" : "BofA",
+    "city" : "Charlotte, NC",
+    "latitude" : 35.2271,
+    "longitude" : -80.8431,
+    "revenueOpportunity" : 1,
+    "availableDate" : "2018-01-01"
+  },{
+    "accountId"	 : 8,
+    "venueName" : "FedEx",
+    "city" : "Memphis, TN",
+    "latitude" : 35.1495,
+    "longitude" : -90.049,
+    "revenueOpportunity" : 1,
+    "availableDate" : "2018-01-01"
+  },{
+    "accountId"	 : 9,
+    "venueName" : "Marriott",
+    "city" : "Bethesda, MD",
+    "latitude" : 38.9847,
+    "longitude" : -77.0947,
+    "revenueOpportunity" : 1,
+    "availableDate" : "2018-01-01"
+  },{
+    "accountId"	 : 10,
+    "venueName" : "Entergy",
+    "city" : "New Orleans, LA",
+    "latitude" : 29.9511,
+    "longitude" : -90.0715,
+    "revenueOpportunity" : 1,
+    "availableDate" : "2018-01-01"
+  }
+  ]
+  
