@@ -20,6 +20,9 @@ public class SolverServiceTest {
 	SolverService solver;
 	
 	@Autowired
+	CacheService cacheService;
+	
+	@Autowired
 	ObjectMapper mapper;
 	
 	@Test
@@ -34,9 +37,9 @@ public class SolverServiceTest {
 	
 	@Test
 	public void userInputTest() throws JsonProcessingException {
-		solver.addUserInput("103");
-		solver.addUserInput("104");
-		solver.addUserInput("103");
+		cacheService.addUserInput("103");
+		cacheService.addUserInput("104");
+		cacheService.addUserInput("103");
 		CacheService cacheService = CacheService.getInstance();
 		cacheService.printCache();
 	}

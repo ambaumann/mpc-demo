@@ -12,7 +12,8 @@ public class MPCAccount implements java.io.Serializable{
 	private Double longitude;
 	private LocalDate availableDate;
 	private int revenueOpportunity;
-	private int requestCount = 0;
+	private int requestCount = 1;
+	private String revenueOpportunityStr;
 	
 	public static MPCAccount createFromRockShow(RockShow rockShow) {
 		MPCAccount mpcAccount = new MPCAccount();
@@ -100,7 +101,12 @@ public class MPCAccount implements java.io.Serializable{
 		//this.revenueOpportunity  += this.revenueOpportunity * requestCount;
 	}
 	
-	
+	public String getRevenueOpportunityStr() {
+		this.revenueOpportunityStr = String.format("$%.2fM", (revenueOpportunity * requestCount)/ 1000000.0);
+		return revenueOpportunityStr;
+	}
 
-	
+	public void setRevenueOpportunityStr(String revenueOpportunityStr) {
+		this.revenueOpportunityStr = revenueOpportunityStr;
+	}
 }

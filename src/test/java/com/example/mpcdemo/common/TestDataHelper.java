@@ -29,7 +29,8 @@ public class TestDataHelper {
 		entries.add(se1);
 		entries.add(se2);
 		
-		solution.solutionEntries = entries;
-		return solution;
+		//TODO: need to replace solutionEntries with accounts<MPCAccount>
+		//solution.solutionEntries = entries;
+		return null;
 	}
 }
