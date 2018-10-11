@@ -48,12 +48,12 @@ public class CacheService {
 		String jdgServerPort = System.getenv("DATAGRID_APP_HOTROD_SERVICE_PORT");
 	
 		// Catch and handle null values
-		//jdgServerHost = (jdgServerHost == null) ? "datagrid-app-hotrod" : jdgServerHost;
-		//jdgServerPort = (jdgServerPort == null) ? "11333" : jdgServerPort;
+		jdgServerHost = (jdgServerHost == null) ? "datagrid-app-hotrod" : jdgServerHost;
+		jdgServerPort = (jdgServerPort == null) ? "11333" : jdgServerPort;
 	
 		//local JDG cache for testing
-		jdgServerHost = (jdgServerHost == null) ? "127.0.0.1" : jdgServerHost;
-		jdgServerPort = (jdgServerPort == null) ? "11222" : jdgServerPort;
+		//jdgServerHost = (jdgServerHost == null) ? "127.0.0.1" : jdgServerHost;
+		//jdgServerPort = (jdgServerPort == null) ? "11222" : jdgServerPort;
 	
 		String serverEndpoint = jdgServerHost.concat(":").concat(jdgServerPort);
 		Configuration configuration = new ConfigurationBuilder().addServers(serverEndpoint).build();
