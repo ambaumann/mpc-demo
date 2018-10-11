@@ -24,7 +24,7 @@ public class ProblemAPIController {
 	
 	@Autowired
 	public CacheService cacheService;
-	
+		
 	/**
 	 * Endpoint to pull to know when solver is finished
 	 * // TODO return type will probs change to enum or something more specific
@@ -62,11 +62,16 @@ public class ProblemAPIController {
 	 * See the solver status if unsure.
 	 * @return solved solution
 	 */
+	@CrossOrigin(origins = "*", maxAge = 3600)
 	@GetMapping("solver/solution")
 	public List<MPCAccount> getSolution() {
 		
 		if(solverService.isFinalSolutionReady()) {
-			return solverService.getOrderedAccounts();
+			List<MPCAccount> accountsToPrint = solverService.getOrderedAccounts();
+			System.out.println("Optimal truck route...");
+			if (accountsToPrint != null)
+				accountsToPrint.forEach(System.out::println);
+			return accountsToPrint;
 		} else {
 			// TODO handle error.
 			return null;

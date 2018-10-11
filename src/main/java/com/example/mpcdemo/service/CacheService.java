@@ -48,12 +48,12 @@ public class CacheService {
 		String jdgServerPort = System.getenv("DATAGRID_APP_HOTROD_SERVICE_PORT");
 	
 		// Catch and handle null values
-		jdgServerHost = (jdgServerHost == null) ? "datagrid-app-hotrod" : jdgServerHost;
-		jdgServerPort = (jdgServerPort == null) ? "11333" : jdgServerPort;
+		//jdgServerHost = (jdgServerHost == null) ? "datagrid-app-hotrod" : jdgServerHost;
+		//jdgServerPort = (jdgServerPort == null) ? "11333" : jdgServerPort;
 	
 		//local JDG cache for testing
-		//jdgServerHost = (jdgServerHost == null) ? "127.0.0.1" : jdgServerHost;
-		//jdgServerPort = (jdgServerPort == null) ? "11222" : jdgServerPort;
+		jdgServerHost = (jdgServerHost == null) ? "127.0.0.1" : jdgServerHost;
+		jdgServerPort = (jdgServerPort == null) ? "11222" : jdgServerPort;
 	
 		String serverEndpoint = jdgServerHost.concat(":").concat(jdgServerPort);
 		Configuration configuration = new ConfigurationBuilder().addServers(serverEndpoint).build();
@@ -156,9 +156,36 @@ public class CacheService {
 	public void addUserInput(String accountId) {
 
 		MPCAccount account = accountsCache.get(Integer.parseInt(accountId));
+		String accountName = "";
 		if (account != null) {
 			account.setRequestCount(account.getRequestCount()+1); //will update the revenueOpportunity
 			accountsCache.put(Integer.parseInt(accountId), account);
+			switch (accountId) {
+            		case "101":  accountName = "AMEX";
+            		break;
+            		case "102":  accountName = "Visa";
+            		break;
+            		case "103":  accountName = "Exxon";
+            		break;
+            		case "104":  accountName = "Pemex";
+            		break;
+            		case "105":  accountName = "Discover";
+            		break;
+            		case "106":  accountName = "Macys";
+            		break;
+            		case "107":  accountName = "RBC";
+            		break;
+            		case "108":  accountName = "Citi";
+            		break;
+            		case "109":  accountName = "Delta";
+            		break;
+            		case "110":  accountName = "Costco";
+            		break;
+
+            		default: accountName = "none";
+                break;
+			}
+			System.out.println("MPC Request for account: "+ accountName);
 		}
 		else
 		{

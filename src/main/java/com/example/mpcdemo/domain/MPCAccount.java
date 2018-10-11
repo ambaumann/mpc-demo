@@ -109,4 +109,9 @@ public class MPCAccount implements java.io.Serializable{
 	public void setRevenueOpportunityStr(String revenueOpportunityStr) {
 		this.revenueOpportunityStr = revenueOpportunityStr;
 	}
+	
+	@Override
+	public String toString() {
+		return " Account Id: " + this.accountId + ":: Account Name: " + this.venueName + " :: Location: " + this.getCity() + " :: gps coordinates: " + this.latitude + " " + this.longitude;  
+	}
 }
